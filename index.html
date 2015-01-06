@@ -30,7 +30,7 @@ ga('send', 'pageview');
   <div id="header_wrap" class="outer">
 
     <header class="inner">
-      <a id="forkme_banner" href="https://github.com/orhanobut/effective-android">Contribute on GitHub </a>
+      <a id="forkme_banner" href="https://github.com/orhanobut/effective-android-security">Contribute on GitHub </a>
       <a id='social' href="https://twitter.com/orhanobut" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @orhanobut</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
@@ -95,7 +95,7 @@ ga('send', 'pageview');
         <p>The android platform uses the linux user-based protection model to isolate one application from the another. In linux, multiple applications can run with the same user permission. But android assigns a unique user id (UID) to each application and run it in a separate process. Each application is like a user </p>
         <p>This sets up a kernel-level Application Sandbox. The kernel enforces security between the applications and system at the process level by using linux features. By default, applications cannot interact with eachother and they have limited access to system resources.</p>
         <p>The application sandbox is in kernel, thus it extends to native code and operating system applications as well. All runs within the application sandbox</p>
-        <img src='images/application-sandbox.png' height='200' weight='400'/>
+        <img src='images/application-sandbox.png' height='200'/>
         <hr>
         <ul>
           <li>A user-based permissions model</li>
@@ -120,8 +120,8 @@ ga('send', 'pageview');
 
         <h3><li>Personal Information</h3></li>
         <p>Access to sensitive user data is available only through protected APIs </p>
-                <img src='images/user-data.png' height='200' weight='400'/>
-                <hr>
+        <img src='images/user-data.png' height='200'/>
+        <hr>
         <p>Read list</p>
         <ul>
           <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#personal-information'>https://source.android.com/devices/tech/security/overview/app-security.html#personal-information</a></li>
@@ -199,9 +199,9 @@ ga('send', 'pageview');
           <li>Every application must be signed, otherwise it will be rejected</li>
           <li>Application signing is the first step for the application sandbox.</li>
           <li>Application signing ensures that one application cannot access any other application except through well-defined IPC</li>
-                  <li>Do not sign the application with a publicly known key</li>
-        <li>Do not sign with the platform key</li>
-        <li>Applications with the same package name should not be signed with the different keys</li>
+          <li>Do not sign the application with a publicly known key</li>
+          <li>Do not sign with the platform key</li>
+          <li>Applications with the same package name should not be signed with the different keys</li>
         </ul>
         <hr>
         <p>Tips:</p>
@@ -254,8 +254,8 @@ ga('send', 'pageview');
         <h3><li>Storing Data - Content Providers</h3></li>
         <p>A structured storage mechanism. You must register it within manifest file.</p>
 
-                <img src='images/content-provider.png' height='200' weight='400'/>
-                <hr>
+        <img src='images/content-provider.png' height='200'/>
+        <hr>
         <ul>
           <li>You can set export option to provide data to other applications or not. (android:export in manifest file). The default value is "true" for applications that set either android:minSdkVersion or android:targetSdkVersion to "16" or lower. For applications that set either of these attributes to "17" or higher, the default is "false". </li>
           <li>Use signature protection level to limit with your own apps.Signature protection: Only the applications which are signed by the same key can access</li>
@@ -467,8 +467,8 @@ ga('send', 'pageview');
 
         <h3><li>Using Broadcast Receivers</h3></li>
         <p></p>
-          <img src='images/broadcast.png' height='200' weight='400'/>
-                <hr>
+        <img src='images/broadcast.png' height='200'/>
+        <hr>
         <ul>
           <li>Intents are the preferred mechanism for asynchronous IPC in Android by using broadcast receivers.</li>
           <li>Set export atribute to receivers. By default, receivers are exported</li>
@@ -499,9 +499,9 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Using IPC - Binder and Messenger Interface</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Using IPC - Binder and Messenger Interface</h3></li>
+      <p></p>
+      <ul>
         <li>Preferred for RPC-style IPC </li>
         <li>Use checkCallingPermission() to verify whether the caller has a required permission</li>
         <li>Binder and Messenger objects are not declared in manifest, therefore you cannot apply permissions</li>
@@ -516,9 +516,9 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Dynamically Loading Code</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Dynamically Loading Code</h3></li>
+      <p></p>
+      <ul>
         <li>Do not load code from outside</li>
         <li>The code runs in the same permissions as the application</li>
         <li>Verify the source if you need to load</li>
@@ -532,9 +532,9 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Logging</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Logging</h3></li>
+      <p></p>
+      <ul>
         <li>Logs are a shared resource</li>
         <li>Do not log sensitive data such as user name, credit card, password etc</li>
         <li>Do not log data provided from 3rd parties. You don't know the content, thus don't expose it.</li>
@@ -543,14 +543,14 @@ ga('send', 'pageview');
       <hr>
       <p>Read list</p>
       <ul>
-        
+
       </ul>
 
 
 
-       <h3><li>Use Proguard</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Use Proguard</h3></li>
+      <p></p>
+      <ul>
         <li>Obfuscate your code, thus it makes hard for reverse engineering</li>
         <li>Removes your debug logs</li>
         <li>Decrease the size</li>
@@ -565,9 +565,9 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Security with HTTPS and SSL</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Security with HTTPS and SSL</h3></li>
+      <p></p>
+      <ul>
         <li>Anyone can generate their own certificate and private key, simple handshake does NOT prove that it is secure.</li>
         <li>Use certificate authorities (CA)</li>
         <li>Android 4.2 currently contains over 100 CAs.</li>
@@ -584,9 +584,9 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Be aware of reverse engineering</h3></li>
-       <p></p>
-       <ul>
+      <h3><li>Be aware of reverse engineering</h3></li>
+      <p></p>
+      <ul>
         <li>The application apk can be exported easily. Apk itself is a zip folder and it is very easy to extract it.</li>
         <li>Reverse engineer can be done easily to the apk by using apktool. Apktool is a tool for reverse engineering 3rd party, closed, binary Android apps. It can decode resources to nearly original form and rebuild them after making some modifications; it makes possible to debug smali code step by step. Also it makes working with app easier because of project-like files structure and automation of some repetitive tasks like building apk, etc. </li>
       </ul>
@@ -598,8 +598,8 @@ ga('send', 'pageview');
 
 
 
-       <h3><li>Be aware of app licensing</h3></li>
-       <p>Google Play offers a licensing service that lets you enforce licensing policies for applications that you publish on Google Play. With Google Play Licensing, your application can query Google Play at run time to obtain the licensing status for the current user, then allow or disallow further use as appropriate.</p>
+      <h3><li>Be aware of app licensing</h3></li>
+      <p>Google Play offers a licensing service that lets you enforce licensing policies for applications that you publish on Google Play. With Google Play Licensing, your application can query Google Play at run time to obtain the licensing status for the current user, then allow or disallow further use as appropriate.</p>
       <hr>
       <p>Read list</p>
       <ul>

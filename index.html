@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="Effective Android : Effective android items with samples">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <title>Effective Android Security</title>
+</head>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58175229-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+
+    <header class="inner">
+      <a id="forkme_banner" href="https://github.com/orhanobut/effective-android">Contribute on GitHub </a>
+      <a id='social' href="https://twitter.com/orhanobut" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @orhanobut</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+      <h1 id="project_title">Effective Android Security</h1>  
+    </header>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <ol>
+
+        <h3><li>Android Platform</h3></li>
+        <p>Android is open source and designed with a flexible multilayer. Android seeks to be a secure platform for the users, thus Android seeks to </p>
+        <ul>
+          <li>Protect user data</li>
+          <li>Protect system resources (including the network)</li>
+          <li>Provide application isolation</li>
+        </ul>
+        <p>To accomplish a secure application, Android provides:</p>
+        <ul>
+          <li>Robust security at the OS level through the Linux kernel</li>
+          <li>Mandatory application sandbox for all applications</li>
+          <li>Secure interprocess communication</li>
+          <li>Application signing</li>
+          <li>Permissions</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/index.html#android-platform-security-architecture'>https://source.android.com/devices/tech/security/overview/index.html#android-platform-security-architecture</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Linux Security</h3></li>
+        <p>Android is built on linux kernel and it's been around for a long time, because of that linux kernel has been maintained and fixed and made stable. Linux kernel provides several key security features:</p>
+        <ul>
+          <li>A user-based permissions model</li>
+          <li>Process isolation</li>
+          <li>Extensible mechanism for secure IPC</li>
+          <li>The ability to remove unnecessary and potentially insecure parts of the kernel</li>
+        </ul>
+        <p>Linux is a multiuser operating system and linux kernel isolate user resources from another one another for the security reasons. Linux aim to protect user data, thus linux:</p>
+        <ul>
+          <li>Prevents user A from reading user B's files</li>
+          <li>Ensures that user A does not exhaust user B's memory</li>
+          <li>Ensures that user A does not exhaust user B's CPU resources</li>
+          <li>Ensures that user A does not exhaust user B's devices (e.g. telephony, GPS, bluetooth)</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/kernel-security.html#linux-security'>https://source.android.com/devices/tech/security/overview/kernel-security.html#linux-security</a></li>
+        </ul>
+
+
+
+
+        <h3><li>The Application Sandbox</h3></li>
+        <p>The android platform uses the linux user-based protection model to isolate one application from the another. In linux, multiple applications can run with the same user permission. But android assigns a unique user id (UID) to each application and run it in a separate process. Each application is like a user </p>
+        <p>This sets up a kernel-level Application Sandbox. The kernel enforces security between the applications and system at the process level by using linux features. By default, applications cannot interact with eachother and they have limited access to system resources.</p>
+        <p>The application sandbox is in kernel, thus it extends to native code and operating system applications as well. All runs within the application sandbox</p>
+        <img src='images/application-sandbox.png' height='200' weight='400'/>
+        <hr>
+        <ul>
+          <li>A user-based permissions model</li>
+          <li>Process isolation</li>
+          <li>Extensible mechanism for secure IPC</li>
+          <li>The ability to remove unnecessary and potentially insecure parts of the kernel</li>
+        </ul>
+        <p>Linux is a multiuser operating system and linux kernel isolate user resources from another one another for the security reasons. Linux aim to protect user data, thus linux:</p>
+        <ul>
+          <li>Prevents user A from reading user B's files</li>
+          <li>Ensures that user A does not exhaust user B's memory</li>
+          <li>Ensures that user A does not exhaust user B's CPU resources</li>
+          <li>Ensures that user A does not exhaust user B's devices (e.g. telephony, GPS, bluetooth)</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/kernel-security.html#linux-security'>https://source.android.com/devices/tech/security/overview/kernel-security.html#linux-security</a></li>
+        </ul>
+
+
+
+        <h3><li>Personal Information</h3></li>
+        <p>Access to sensitive user data is available only through protected APIs </p>
+                <img src='images/user-data.png' height='200' weight='400'/>
+                <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#personal-information'>https://source.android.com/devices/tech/security/overview/app-security.html#personal-information</a></li>
+        </ul>
+
+
+        <h3><li>SIM Card Access</h3></li>
+        <p>Low level access to the SIM card is not available to third-party apps. The OS Handles all communication with the SIM Card.</p>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#sim-card-access'>https://source.android.com/devices/tech/security/overview/app-security.html#sim-card-access</a></li>
+        </ul>
+
+
+
+        <h3><li>Cost Sensitive APIs</h3></li>
+        <p>Cost sensitive means using them might generate cost, thus android provides a protection in OS level. Applications must grant explicit permission to use these APIs.</p>
+        <ul>
+          <li>Telephony</li>
+          <li>SMS/MMS</li>
+          <li>Network/Data</li>
+          <li>In-App Billing</li>
+          <li>NFC Access</li>
+        </ul>
+        <hr>
+        <p>Tips:</p>
+        <ul>
+          <li>With Android 4.2, the user gets a notification when the SMS feature is used, then user decides to whether send the message or not.</li>
+        </ul>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#cost-sensitive-apis'>https://source.android.com/devices/tech/security/overview/app-security.html#cost-sensitive-apis</a></li>
+        </ul>
+
+
+
+        <h3><li>Sensitive Data Input Devices</h3></li>
+        <p>Applications must grant an explicit permission to use input devices such as:</p>
+        <ul>
+          <li>GPS</li>
+          <li>Camera</li>
+          <li>Microphone</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#sensitive-data-input-devices'>https://source.android.com/devices/tech/security/overview/app-security.html#sensitive-data-input-devices</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Device Metadata</h3></li>
+        <p>Device information might contains user information, thus applications must grant to access :</p>
+        <ul>
+          <li>Operating system logs</li>
+          <li>Browser history</li>
+          <li>Phone number</li>
+          <li>Hardware / network identification information</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#sensitive-data-input-devices'>https://source.android.com/devices/tech/security/overview/app-security.html#sensitive-data-input-devices</a></li>
+        </ul>
+
+
+
+
+
+        <h3><li>Application Signing</h3></li>
+        <p></p>
+        <ul>
+          <li>Signing allows developers to identify the author of the application.</li>
+          <li>Every application must be signed, otherwise it will be rejected</li>
+          <li>Application signing is the first step for the application sandbox.</li>
+          <li>Application signing ensures that one application cannot access any other application except through well-defined IPC</li>
+                  <li>Do not sign the application with a publicly known key</li>
+        <li>Do not sign with the platform key</li>
+        <li>Applications with the same package name should not be signed with the different keys</li>
+        </ul>
+        <hr>
+        <p>Tips:</p>
+        <ul>
+          <li>Never ever forget your keystore. Send it via email to yourself to keep it. If you lose your keystore, you won't be able to get it back and you cannot update your application anymore.</li>
+        </ul>
+        <p>Read list</p>
+        <ul>
+          <li><a href='https://source.android.com/devices/tech/security/overview/app-security.html#application-signing'>https://source.android.com/devices/tech/security/overview/app-security.html#application-signing</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Storing Data - Internal Storage</h3></li>
+        <p></p>
+        <ul>
+          <li>By default, files that you create on internal storage are accessible only to your app</li>
+          <li>Avoid MODE_WORLD_WRITEABLE or MODE_WORLD_READABLE</li>
+          <li>Use content provider for share</li>
+          <li>Consider Encryption for additional protection</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#StoringData'>http://developer.android.com/training/articles/security-tips.html#StoringData</a></li>
+        </ul>
+
+
+
+
+
+        <h3><li>Storing Data - External Storage</h3></li>
+        <p></p>
+        <ul>
+          <li>Globally readable and writeable</li>
+          <li>Always perform input validation</li>
+          <li>Do not store executables or class files</li>
+          <li>Always retrieve signed and verified files.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#StoringData'>http://developer.android.com/training/articles/security-tips.html#StoringData</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Storing Data - Content Providers</h3></li>
+        <p>A structured storage mechanism. You must register it within manifest file.</p>
+
+                <img src='images/content-provider.png' height='200' weight='400'/>
+                <hr>
+        <ul>
+          <li>You can set export option to provide data to other applications or not. (android:export in manifest file). The default value is "true" for applications that set either android:minSdkVersion or android:targetSdkVersion to "16" or lower. For applications that set either of these attributes to "17" or higher, the default is "false". </li>
+          <li>Use signature protection level to limit with your own apps.Signature protection: Only the applications which are signed by the same key can access</li>
+          <li>Use parameterized query methods such as query(), update(), delete to avoid SQL injection</li>
+          <li>Do not use content provider if you will use only in your app.</li>
+        </ul>
+        <hr>
+        <p>Tips:</p>
+        <ul>
+          <li>Always set export atribute.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#StoringData'>http://developer.android.com/training/articles/security-tips.html#StoringData</a></li>
+        </ul>
+
+
+
+        <h3><li>Shared Preferences</h3></li>
+        <p></p>
+        <ul>
+          <li>Shared preference is an xml file which stored in the application directory. (/data/data)</li>
+          <li>They can be read easily with the root priviliges. Because of that, do not store any sensitive information in there.</li>
+          <li>Without root priviliges, no other application can access that area. It is protected by the application sandbox.</li>
+          <li>Use crypto if you need to store an information which might be sensitive such as bank account number etc.</li>
+          <li>Data is stored as key/value pair. Make your keys to hard to understandable such as random characters. Such as KEY_NAME = "asdfadsf"</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://stackoverflow.com/questions/9244318/android-sharedpreference-security'>http://stackoverflow.com/questions/9244318/android-sharedpreference-security</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Android Resources/Assets</h3></li>
+        <p></p>
+        <ul>
+          <li>Do not store any sensitive information in the resources/assets such as keystore key etc. They can be read and accessed easily.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://stackoverflow.com/questions/3406581/security-of-android-assets-folder'>http://stackoverflow.com/questions/3406581/security-of-android-assets-folder</a></li>
+        </ul>
+
+
+
+        <h3><li>Using Permissions</h3></li>
+        <p></p>
+        <ul>
+          <li>Minimize the permission request.</li>
+          <li>Do not request unless you really really need it</li>
+          <li>Do not leak permission-protected data.</li>
+          <li>Use permissions to protect IPC. This occurs when your app exposes data over IPC that is only available because it has a specific permission</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#Permissions'>http://developer.android.com/training/articles/security-tips.html#Permissions</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Using IP Networking</h3></li>
+        <p></p>
+        <ul>
+          <li>Use of HTTPS over HTTP anywhere that HTTPS is supported on the server.</li>
+          <li>Do not trust data downloaded from HTTP or other insecure protocols.</li>
+          <li>To interact to another application always use android interprocess mechanisms</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#Networking'>http://developer.android.com/training/articles/security-tips.html#Networking</a></li>
+        </ul>
+
+
+
+        <h3><li>Using Telephony Networking</h3></li>
+        <p></p>
+        <ul>
+          <li>SMS is neither encrpyted not strongly authenticated.</li>
+          <li>SMS messages are transmitted as broadcast intents, so they may be read or captured by other applications that have the READ_SMS permission.</li>
+          <li>Consider using GCM or IP Networking for data transfer</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#Networking'>http://developer.android.com/training/articles/security-tips.html#Networking</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Performing Input Validation</h3></li>
+        <p>Insufficient input validation is one of the most common security problems affecting applications, regardless of what platform they run on.</p>
+        <ul>
+          <li>Beware of script injection such as javascript and SQL</li>
+          <li>Use parameterized queries to avoid injections</li>
+          <li>Always verify the format</li>
+          <li>Beware of potential secure issues when using native code.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#InputValidation'>http://developer.android.com/training/articles/security-tips.html#InputValidation</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Handling User Data</h3></li>
+        <p></p>
+        <ul>
+          <li>Minimize the use of APIs that access sensivite data</li>
+          <li>Consider hash/non-reversible form of the data when storing such as md5</li>
+          <li>Do not expose user data to other apps such as IPC, store to external storage, network etc</li>
+          <li>If a GUID is required, use UUID. Do not use phone identifiers.</li>
+          <li>Do NOT log these data</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#UserData'>http://developer.android.com/training/articles/security-tips.html#UserData</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Using WebView</h3></li>
+        <p></p>
+        <ul>
+          <li>Beware of cross-site-scripting (Javascript), because webview consume web content</li>
+          <li>Do not call setJavaScriptEnabled() if your app does not directly use JavaScript. By default, WebView does not execute JavaScript</li>
+          <li>Use clearCache() when accessing sensitive data</li>
+          <li>Use addJavaScriptInterface() with particular care because it allows JavaScript to invoke operations that are normally reserved for Android applications. If you use it, expose addJavaScriptInterface() only to web pages from which all input is trustworthy.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#WebView'>http://developer.android.com/training/articles/security-tips.html#WebView</a></li>
+        </ul>
+
+
+
+
+
+
+        <h3><li>Handling Credentials</h3></li>
+        <p></p>
+        <ul>
+          <li>Minimize the frequency of asking for user credentials, use authorization token and refresh it</li>
+          <li>Where possible, do not store username and password in the device</li>
+          <li>Perform initial authentication using the username and password supplied by the user, and then use a short-lived, service-specific authorization token.</li>
+          <li>Use account manager to prevent pass credentials to wrong application</li>
+          <li>Consider KeyStore for storage</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#WebView'>http://developer.android.com/training/articles/security-tips.html#WebView</a></li>
+          <li><a href='http://developer.android.com/reference/android/accounts/AccountManager.html'>http://developer.android.com/reference/android/accounts/AccountManager.html</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Using cryptography</h3></li>
+        <p></p>
+        <ul>
+          <li>Do not implement your own cryptographic algorithms. Android provides a wide array of algorithms for protecting data using cryptography.</li>
+          <li>Use AES or RSA </li>
+          <li>Use a secure random generator, (SecureRandom)</li>
+          <li>Use KeyStore if you need to store a key for repeated use</li>
+          <li>Use the highest level of pre-existing framework implementation</li>
+          <li>Consider using HttpsURLConnection or SSLSocket, rather than writing your own protocol.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#Crypto'>http://developer.android.com/training/articles/security-tips.html#Crypto</a></li>
+          <li><a href='http://en.wikipedia.org/wiki/Advanced_Encryption_Standard'>http://en.wikipedia.org/wiki/Advanced_Encryption_Standard</a></li>
+          <li><a href='http://en.wikipedia.org/wiki/RSA_%28cryptosystem%29'>http://en.wikipedia.org/wiki/RSA_%28cryptosystem%29</a></li>
+          <li><a href='http://docs.oracle.com/javase/7/docs/api/java/security/MessageDigest.html'>http://docs.oracle.com/javase/7/docs/api/java/security/MessageDigest.html</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Using Interprocess Communication</h3></li>
+        <p> </p>
+        <ul>
+          <li>When you need to communicate with another application use android system functionality such as Intent, Binder or Messenger with a Service, and BroadcastReceiver.</li>
+          <li>The Android IPC mechanisms allow you to verify the identity of the application connecting to your IPC and set security policy for each IPC mechanism.</li>
+          <li>If your IPC mechanism is not intended for use by other applications, set the android:exported attribute to "false" in the component's manifest element, such as for the service.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+          <li><a href='http://developer.android.com/training/articles/security-tips.html#IPC'>http://developer.android.com/training/articles/security-tips.html#IPC</a></li>
+        </ul>
+
+
+
+
+        <h3><li>Using Broadcast Receivers</h3></li>
+        <p></p>
+          <img src='images/broadcast.png' height='200' weight='400'/>
+                <hr>
+        <ul>
+          <li>Intents are the preferred mechanism for asynchronous IPC in Android by using broadcast receivers.</li>
+          <li>Set export atribute to receivers. By default, receivers are exported</li>
+          <li>Consider applying a permission to make sure the malicious apps cannot receive.</li>
+          <li>Use LocalBroadcastManager for internal broadcast.</li>
+          <li>Make input validation when you consume a broadcast.</li>
+        </ul>
+        <hr>
+        <p>Read list</p>
+        <ul>
+         <li><a href='http://developer.android.com/training/articles/security-tips.html#IPC'>http://developer.android.com/training/articles/security-tips.html#IPC</a></li>
+       </ul>
+
+
+
+       <h3><li>Using Services</h3></li>
+       <p>A Service is often used to supply functionality for other applications to use. Each service class must have a corresponding declaration in its manifest file </p>
+       <ul>
+        <li>Always set exported attribute, by default it is false.</li>
+        <li>Always use permissions to limit to access</li>
+        <li>Use checkCallingPermission() before executing the call</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/training/articles/security-tips.html#IPC'>http://developer.android.com/training/articles/security-tips.html#IPC</a></li>
+      </ul>
+
+
+
+       <h3><li>Using IPC - Binder and Messenger Interface</h3></li>
+       <p></p>
+       <ul>
+        <li>Preferred for RPC-style IPC </li>
+        <li>Use checkCallingPermission() to verify whether the caller has a required permission</li>
+        <li>Binder and Messenger objects are not declared in manifest, therefore you cannot apply permissions</li>
+        <li>If calling an interface provided locally by your own application, it may be useful to use the clearCallingIdentity() to satisfy internal security checks.</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/training/articles/security-tips.html#IPC'>http://developer.android.com/training/articles/security-tips.html#IPC</a></li>
+        <li><a href='http://stackoverflow.com/questions/6686686/android-binder-security'>http://stackoverflow.com/questions/6686686/android-binder-security</a></li>
+      </ul>
+
+
+
+       <h3><li>Dynamically Loading Code</h3></li>
+       <p></p>
+       <ul>
+        <li>Do not load code from outside</li>
+        <li>The code runs in the same permissions as the application</li>
+        <li>Verify the source if you need to load</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/training/articles/security-tips.html#DynamicCode'>http://developer.android.com/training/articles/security-tips.html#DynamicCode</a></li>
+      </ul>
+
+
+
+
+       <h3><li>Logging</h3></li>
+       <p></p>
+       <ul>
+        <li>Logs are a shared resource</li>
+        <li>Do not log sensitive data such as user name, credit card, password etc</li>
+        <li>Do not log data provided from 3rd parties. You don't know the content, thus don't expose it.</li>
+        <li>Remove debug logs in release version by using proguard</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        
+      </ul>
+
+
+
+       <h3><li>Use Proguard</h3></li>
+       <p></p>
+       <ul>
+        <li>Obfuscate your code, thus it makes hard for reverse engineering</li>
+        <li>Removes your debug logs</li>
+        <li>Decrease the size</li>
+        <li>Optimizes slightly.</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/tools/help/proguard.html'>http://developer.android.com/tools/help/proguard.html</a></li>
+      </ul>
+
+
+
+
+       <h3><li>Security with HTTPS and SSL</h3></li>
+       <p></p>
+       <ul>
+        <li>Anyone can generate their own certificate and private key, simple handshake does NOT prove that it is secure.</li>
+        <li>Use certificate authorities (CA)</li>
+        <li>Android 4.2 currently contains over 100 CAs.</li>
+        <li>Android uses blacklisting. Certain certificates or even whole CAs are prevented.</li>
+        <li>Use pinning. Restrict an app's trusted CAs, An app can further protect itself from fraudulently issued certificates by a technique known as pinning</li>
+        <li>Client certificates : SSL also supports the notion of client certificates that allow the server to validate the identity of a client.</li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/training/articles/security-ssl.html'>http://developer.android.com/training/articles/security-ssl.html</a></li>
+      </ul>
+
+
+
+
+       <h3><li>Be aware of reverse engineering</h3></li>
+       <p></p>
+       <ul>
+        <li>The application apk can be exported easily. Apk itself is a zip folder and it is very easy to extract it.</li>
+        <li>Reverse engineer can be done easily to the apk by using apktool. Apktool is a tool for reverse engineering 3rd party, closed, binary Android apps. It can decode resources to nearly original form and rebuild them after making some modifications; it makes possible to debug smali code step by step. Also it makes working with app easier because of project-like files structure and automation of some repetitive tasks like building apk, etc. </li>
+      </ul>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='https://code.google.com/p/android-apktool/'>https://code.google.com/p/android-apktool</a></li>
+      </ul>
+
+
+
+       <h3><li>Be aware of app licensing</h3></li>
+       <p>Google Play offers a licensing service that lets you enforce licensing policies for applications that you publish on Google Play. With Google Play Licensing, your application can query Google Play at run time to obtain the licensing status for the current user, then allow or disallow further use as appropriate.</p>
+      <hr>
+      <p>Read list</p>
+      <ul>
+        <li><a href='http://developer.android.com/google/play/licensing/index.html'>http://developer.android.com/google/play/licensing/index.html</a></li>
+      </ul>
+
+
+    </ol>
+  </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+  <footer class="inner">
+    <p class="copyright">Effective Android maintained by <a href="https://github.com/orhanobut">orhanobut</a></p>
+  </footer>
+</div>
+
+
+
+</body>
+</html>
